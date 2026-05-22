@@ -1,4 +1,8 @@
 # Dota 2 Workshop Tools compiled / cache artifacts
 *_c
+*.vpk
 tools_*.bin
 *.sqlite3
+
+# Compiled map build output (map sources live under content/.../maps/)
+addon/game/dota_addons/*/maps/
