@@ -1,0 +1,24 @@
+<root>
+  <styles><include src="file://{resources}/styles/custom_game/hud.css" /></styles>
+  <scripts><include src="file://{resources}/scripts/custom_game/hud.js" /></scripts>
+  <Panel hittest="false" style="width:100%;height:100%;">
+    <Label id="WaveCounter" class="WaveCounter" text="Wave 0" />
+    <Panel id="CharacterPanel" class="CharacterPanel" visible="false">
+      <Panel class="Column">
+        <Label class="ColTitle" text="Equipped" />
+        <Panel id="EquipSlots" class="EquipGrid" />
+      </Panel>
+      <Panel class="Column">
+        <Label class="ColTitle" text="Stats" />
+        <Panel id="StatSheet" class="StatSheet" />
+      </Panel>
+      <Panel class="Column">
+        <Panel class="TabRow">
+          <Button class="Tab" onactivate="ShowBag()"><Label text="Inventory"/></Button>
+          <Button class="Tab" onactivate="ShowStash()"><Label text="Stash"/></Button>
+        </Panel>
+        <Panel id="ItemGrid" class="ItemGrid" />
+      </Panel>
+    </Panel>
+  </Panel>
+</root>
