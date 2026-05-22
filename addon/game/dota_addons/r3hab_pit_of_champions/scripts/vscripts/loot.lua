@@ -1,5 +1,6 @@
 -- loot.lua — host-side drop rolling; backend rolls affix magnitudes.
 require("api")
+require("state") -- for the global RehabSteamId + State.byPlayer
 
 Loot = Loot or {}
 
