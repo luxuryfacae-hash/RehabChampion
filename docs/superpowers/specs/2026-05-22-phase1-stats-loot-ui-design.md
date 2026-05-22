@@ -86,23 +86,27 @@ asserts numeric values.
 
 A single master modifier aggregates: base hero + allocated paragon stats + sum of equipped item affixes,
 recomputed whenever equipped set changes. Applied through `DeclareFunctions` returning the relevant
-`MODIFIER_PROPERTY_*` handlers:
+`MODIFIER_PROPERTY_*` handlers.
 
-| ARPG stat | Modifier property |
+**The affix `stat` strings are a hard contract** with the backend. Phase 1 maps exactly the 10 affixes
+the backend's `AFFIX_POOL` (`backend/src/loot.ts`) currently rolls — no more, no less:
+
+| Affix `stat` (from backend) | Modifier property handler |
 |---|---|
-| Strength / Agility / Intelligence | `..._STATS_STRENGTH_BONUS` / `_AGILITY_` / `_INTELLECT_` |
-| Bonus attack damage | `MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE` |
-| Attack speed | `MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT` |
-| Move speed % | `MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE` |
-| Max health / mana | `MODIFIER_PROPERTY_HEALTH_BONUS` / `_MANA_BONUS` |
-| Crit chance/damage | `MODIFIER_PROPERTY_PREATTACK_CRITICALSTRIKE` (custom roll in handler) |
-| Lifesteal / life-on-hit | `MODIFIER_PROPERTY_LIFESTEAL_AMPLIFY_PERCENTAGE` / `_HEALTH_ON_HIT` via `OnAttackLanded` |
-| Spell amp | `MODIFIER_PROPERTY_SPELL_AMPLIFY_PERCENTAGE` |
-| Cooldown reduction | `MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE` |
-| Resistances | `MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE` / `_PHYSICAL_*` |
+| `strength` | `GetModifierBonusStats_Strength` → `MODIFIER_PROPERTY_STATS_STRENGTH_BONUS` |
+| `agility` | `GetModifierBonusStats_Agility` → `MODIFIER_PROPERTY_STATS_AGILITY_BONUS` |
+| `intellect` | `GetModifierBonusStats_Intellect` → `MODIFIER_PROPERTY_STATS_INTELLECT_BONUS` |
+| `armor` | `GetModifierPhysicalArmorBonus` → `MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS` |
+| `health` | `GetModifierHealthBonus` → `MODIFIER_PROPERTY_HEALTH_BONUS` |
+| `mana` | `GetModifierManaBonus` → `MODIFIER_PROPERTY_MANA_BONUS` |
+| `attack_damage` | `GetModifierPreAttack_BonusDamage` → `MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE` |
+| `attack_speed` | `GetModifierAttackSpeedBonus_Constant` → `MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT` |
+| `crit_chance` | `GetModifierPreAttack_CriticalStrike` (rolls `RandomFloat` vs `crit_chance`%, fixed 150% crit dmg) |
+| `lifesteal` | `OnAttackLanded` event → heal attacker for `lifesteal`% of damage dealt |
 
-Affix `stat` strings are the contract between backend loot rolls and this table (single source of truth:
-a `STAT_KEYS` list shared conceptually between `backend/src/loot.ts` affix pool and `stats.lua`).
+Expanding the pool (move speed, spell amp, cooldown reduction, crit damage, resistances — parent spec §5.3)
+is a **backend tuning task deferred to playtest**; when added there, a matching handler row is added here.
+Single source of truth: the `stat` strings in `AFFIX_POOL` must equal the keys `stats.lua` switches on.
 
 ### 4.2 Loot drop flow (`loot.lua`)
 
