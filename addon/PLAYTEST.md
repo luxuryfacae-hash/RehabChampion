@@ -136,6 +136,9 @@ In order:
   server-authoritative. Accepted listen-server trust (design spec §6.4).
 - **Affix pool is the 10 base stats**; move speed / spell amp / resists / crit damage are a
   later backend tuning pass.
+- **Stash move is one-directional in the UI:** stash→bag works (click a stash item); the
+  bag→stash gesture is not yet wired (the backend `/item/move` supports both — only the UI
+  control is pending). Decide the gesture (drag-onto-Stash-tab vs right-click) during playtest.
 
 ## 6. Phase 1 failure signatures
 
