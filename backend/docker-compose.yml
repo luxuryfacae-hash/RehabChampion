@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: rehab-postgres
+    environment:
+      POSTGRES_DB: rehab
+      POSTGRES_USER: rehab
+      POSTGRES_PASSWORD: rehab
+    ports:
+      - "5433:5432"
+    volumes:
+      - rehab-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rehab -d rehab"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+volumes:
+  rehab-pgdata:
