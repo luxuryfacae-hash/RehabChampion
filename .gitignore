@@ -1,0 +1,4 @@
+# Dota 2 Workshop Tools compiled / cache artifacts
+*_c
+tools_*.bin
+*.sqlite3
