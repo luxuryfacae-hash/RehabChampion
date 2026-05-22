@@ -9,6 +9,9 @@ export const RARITIES = [
 
 export type Rarity = (typeof RARITIES)[number];
 
+/** Highest item level the server will roll. Drop tier is f(wave); this caps abuse. */
+export const MAX_ILVL = 1000;
+
 export interface Affix {
   stat: string;
   value: number;

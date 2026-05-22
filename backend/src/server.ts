@@ -2,7 +2,7 @@ import Fastify, { type FastifyInstance } from "fastify";
 import type { Pool } from "pg";
 import { z } from "zod";
 import { verify } from "./hmac.js";
-import { rollItem, RARITIES, type Rarity } from "./loot.js";
+import { rollItem, RARITIES, MAX_ILVL, type Rarity } from "./loot.js";
 import {
   ensureAccount,
   listCharacters,
@@ -115,7 +115,7 @@ export async function buildServer(opts: BuildOptions): Promise<FastifyInstance> 
       steamid: z.string().min(1),
       characterId: z.number().int().nullable().optional(),
       baseId: z.string().min(1),
-      ilvl: z.number().int().positive(),
+      ilvl: z.number().int().positive().max(MAX_ILVL),
       rarity: rarityEnum,
     });
     const parsed = schema.safeParse(req.body);

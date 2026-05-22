@@ -93,6 +93,17 @@ describe("POST /item/pickup", () => {
     const hasInjected = item.affixes.some((a: { value: number }) => a.value === 999999);
     expect(hasInjected).toBe(false);
   });
+
+  it("rejects an out-of-range ilvl with 400", async () => {
+    await call("/session/start", { steamid: "s_items" });
+    const res = await call("/item/pickup", {
+      steamid: "s_items",
+      baseId: "sword_01",
+      ilvl: 100000,
+      rarity: "Rare",
+    });
+    expect(res.statusCode).toBe(400);
+  });
 });
 
 describe("POST /item/equip + /unequip + /move", () => {
