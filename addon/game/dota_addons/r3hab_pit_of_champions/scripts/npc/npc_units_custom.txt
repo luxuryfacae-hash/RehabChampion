@@ -89,4 +89,88 @@
 			"XPGain"					"15"
 		}
 	}
+
+	//=================================================================================
+	// Creature: Rehab Zombie (basic wave enemy)
+	//=================================================================================
+	"npc_rehab_zombie"
+	{
+		// General
+		//----------------------------------------------------------------
+		"Model"						"models/heroes/undying/undying_minion.vmdl"	// Undying's zombie minion model (ships with Dota).
+		"BaseClass"					"npc_dota_creature"
+		"SoundSet"					"n_creep_Melee"
+		"GameSoundsFile"			"soundevents/game_sounds_creeps.vsndevts"
+		"Level"						"1"
+		"ModelScale"				"1.0"
+
+		// Abilities
+		//----------------------------------------------------------------
+		"Ability1"					""
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
+
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorPhysical"				"2"
+
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
+		"AttackDamageMin"			"20"
+		"AttackDamageMax"			"24"
+		"AttackRate"				"1.5"
+		"AttackAnimationPoint"		"0.3"
+		"AttackAcquisitionRange"	"600"
+		"AttackRange"				"100"
+
+		// Bounds
+		//----------------------------------------------------------------
+		"RingRadius"				"50"
+		"HealthBarOffset"			"160"
+
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyXP"					"20"
+		"BountyGoldMin"				"15"
+		"BountyGoldMax"				"20"
+
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"				"280"
+
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"200"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0.0"
+
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"500"
+		"VisionNighttimeRange"		"500"
+
+		// Team
+		//----------------------------------------------------------------
+		"TeamName"					"DOTA_TEAM_BADGUYS"
+		"CombatClassAttack"			"DOTA_COMBAT_CLASS_ATTACK_BASIC"
+		"CombatClassDefend"			"DOTA_COMBAT_CLASS_DEFEND_BASIC"
+		"UnitRelationshipClass"		"DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"HPGain"					"60"
+			"DamageGain"				"2"
+			"ArmorGain"					"0.25"
+			"MagicResistGain"			"0.1"
+			"MoveSpeedGain"				"1"
+			"BountyGain"				"3"
+			"XPGain"					"12"
+		}
+	}
 }
